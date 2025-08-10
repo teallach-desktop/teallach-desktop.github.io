@@ -2,6 +2,8 @@
 
 We have a menu.
 
+<img src="images/2025-33-menu.png"/>
+
 # 2025.32
 
 If we start with a bare Alpine Linux installation, how much glue is needed to
