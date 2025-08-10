@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+: ${DEPLOY_DIR:=.}
+
+build_src_pages () {
+	for md in src/*.md; do
+		html=${md##*/}
+		html="${DEPLOY_DIR}/${html/%.md/.html}"
+
+		# only build files that have changed
+		[[ $html -ot $md ]] || continue
+
+		echo "Converting $md to $html"
+
+		cat src/template_pre.html > "$html"
+		pandoc --from=markdown+footnotes "$md" >> "$html"
+		cat src/template_post.html >> "$html"
+	done
+}
+
+main () {
+	mkdir -p "$DEPLOY_DIR"
+
+	build_src_pages
+}
+
+main "$@"
