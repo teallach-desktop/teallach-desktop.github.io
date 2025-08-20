@@ -1,3 +1,27 @@
+# 2025.34
+
+## Post-installation Script
+
+It is not great for a packaged program to install files in `$HOME`. So when
+considering how teallach files should be organised, it seems like a
+post-installation script is required to write files like
+`~/.config/labwc/autostart`
+
+```
+teallach-welcome
+```
+
+<img src="images/2025-34-welcome.png"/>
+
+## Theming
+
+Let us favour Server Side Decoration.
+
+<video width="180" height="90" controls>
+  <source src="images/2025-34-theme.webm" type="video/webm"/>
+Your browser does not support the video tag.
+</video> 
+
 # 2025.33
 
 ## Menu
