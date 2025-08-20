@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+<title>labwc</title>
+<meta charset="utf-8" />
+<meta name="description" content="Teallach - a micro Desktop Environment"/>
+<meta name="viewport" content="width=device-width">
+<style>
+body {
+	overflow-y: scroll;
+	font-family: monospace;
+	font-size: 85%;
+	max-width: 640px;
+	padding: 20px;
+	line-height: 1.5;
+	word-wrap: break-word;
+	margin: auto;
+	text-align: justify;
+	text-justify: inter-word;
+	--color-bg: #2E3436;
+	--color-hl: #333;
+	--color-fg: #C0C0C0;
+	--color-link: #FFFFFF;
+	--color-subtle: #555;
+	color: var(--color-fg);
+	background-color: var(--color-bg);
+}
+
+#menu {
+	font-family: sans-serif !important;
+}
+
+pre {
+	padding: 20px;
+	white-space: pre;
+	overflow-x: auto;
+	border: 1px dotted gray;
+	display: block;
+	margin: 20px auto;
+	color: var(--color-fg);
+	background-color: var(--color-bg);
+}
+
+code {
+	font-family: monospace;
+	color: var(--color-fg);
+	background-color: var(--color-bg);
+}
+
+img {
+	margin: 0px;
+	margin-bottom: 20px;
+	margin-top: 20px;
+	max-width: 100%;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table,th,td {
+	border: 1px solid black;
+}
+
+th,td {
+	padding: 15px;
+	text-align: left;
+}
+
+h1 a, h2 a, h3 a, h4 a, h5 a {
+	text-decoration: none;
+}
+
+h1, h2, h3, h4, h5 {
+	color: var(--color-fg);
+	font-family: monospace;
+	font-weight: bold;
+}
+
+h1 {
+	font-size: 130%;
+}
+
+h2 {
+	font-size: 110%;
+}
+
+h3 {
+	font-size: 95%;
+}
+
+h4 {
+	font-size: 90%;
+	font-style: italic;
+}
+
+h5 {
+	font-size: 90%;
+	font-style: italic;
+}
+
+dt code {
+	font-weight: bold;
+}
+
+dd p {
+	margin-top: 0;
+}
+
+a, a:visited {
+	color: var(--color-link);
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a.perma {
+	display: none;
+}
+a.perma:hover {
+	text-decoration: none;
+}
+:hover > a.perma {
+	width: 1.5em;
+	margin-left: -1.5em;
+	display: inline-block;
+}
+
+:target {
+	background-color: rgba(128, 128, 128, 0.2);
+}
+
+.LOC {
+	margin: 2em 0;
+}
+</style>
+</head>
+<body>
+<main>
+<center id="menu">
+[<a href="index.html">home</a>]
+[<a href="blog.html">blog</a>]
+[<a href="manual.html">manual</a>]
+</center>
+<div class="LOC">
+<a href="#data_types">Data types</a> | <a href="#backgrounds">Backgrounds</a> | <a href="#panel">Panel</a> | <a href="#taskbar">Taskbar</a> | <a href="#taskbar_task">Taskbar task</a> | <a href="#clock">Clock</a>
+</div>
+<h1 id="name"><a class="perma" href="#name">🔗</a>NAME</h1>
+<p>tint - lightweight panel</p>
+<h1 id="description"><a class="perma" href="#description">🔗</a>DESCRIPTION</h1>
+<p>Tint is a simple, lightweight panel for Wayland compositors which
+support the wlr-layer-shell and wlr-foreign-toplevel-management
+protocols.</p>
+<p>Features:</p>
+<ul>
+<li><p>Builtin taskbar and clock.</p></li>
+<li><p>High customizability via a plain text configuration file,
+including options for colors of fonts, icons, borders and
+backgrounds.</p></li>
+</ul>
+<h1 id="synopsis"><a class="perma" href="#synopsis">🔗</a>SYNOPSIS</h1>
+<p><strong id="entry_tint_[option...]"><a class="perma" href="#entry_tint_[option...]">🔗</a>tint [OPTION...]</strong></p>
+<h1 id="options"><a class="perma" href="#options">🔗</a>OPTIONS</h1>
+<p><strong id="entry_-h|--help"><a class="perma" href="#entry_-h|--help">🔗</a>-h|--help</strong></p>
+<blockquote>
+<p>Displays help on commandline options</p>
+</blockquote>
+<p><strong id="entry_--help-all"><a class="perma" href="#entry_--help-all">🔗</a>--help-all</strong></p>
+<blockquote>
+<p>Displays help, including generic Qt options</p>
+</blockquote>
+<p><strong id="entry_-v|--version"><a class="perma" href="#entry_-v|--version">🔗</a>-v|--version</strong></p>
+<blockquote>
+<p>Displays version information</p>
+</blockquote>
+<p><strong id="entry_-d|--debug"><a class="perma" href="#entry_-d|--debug">🔗</a>-d|--debug</strong></p>
+<blockquote>
+<p>Enable full logging, including debug information</p>
+</blockquote>
+<p><strong id="entry_-o|--output_output"><a class="perma" href="#entry_-o|--output_output">🔗</a>-o|--output &lt;output&gt;</strong></p>
+<blockquote>
+<p>Specify output (monitor)</p>
+</blockquote>
+<p><strong id="entry_-c|--config_filename"><a class="perma" href="#entry_-c|--config_filename">🔗</a>-c|--config &lt;filename&gt;</strong></p>
+<blockquote>
+<p>Specify config file</p>
+</blockquote>
+<h1 id="configuration"><a class="perma" href="#configuration">🔗</a>CONFIGURATION</h1>
+<h2 id="data_types"><a class="perma" href="#data_types">🔗</a>Data types</h2>
+<p><strong id="entry_color"><a class="perma" href="#entry_color">🔗</a>color</strong></p>
+<blockquote>
+<p>Hexadecimal RGB value using syntax <strong>#rrggbb</strong></p>
+</blockquote>
+<p><strong id="entry_opacity"><a class="perma" href="#entry_opacity">🔗</a>opacity</strong></p>
+<blockquote>
+<p>Integer from 0 to 100, where 0 is fully transparent and 100 is fully
+opaque.</p>
+</blockquote>
+<h2 id="backgrounds"><a class="perma" href="#backgrounds">🔗</a>Backgrounds</h2>
+<p>The tint config file starts with background object definitions which
+other settings refer back to.</p>
+<p>The reserved word <strong>rounded</strong> is used to denote the
+beginning of a new background object section.</p>
+<p>Each background object is identified by an integer starting from 1
+(1, 2, ...) based on the order they appear in the config file.
+Identifier 0 refers to a special background which is fully
+transparent.</p>
+<p><strong id="entry_rounded_=_radius"><a class="perma" href="#entry_rounded_=_radius">🔗</a>rounded = &lt;radius&gt;</strong></p>
+<blockquote>
+<p>Corner radius expressed in number of pixels.</p>
+</blockquote>
+<p><strong id="entry_background_color_=_color__opacity"><a class="perma" href="#entry_background_color_=_color__opacity">🔗</a>background_color = &lt;color&gt; &lt;opacity&gt;</strong></p>
+<blockquote>
+<p>Background color.</p>
+</blockquote>
+<p><strong id="entry_border_color_=_color__opacity"><a class="perma" href="#entry_border_color_=_color__opacity">🔗</a>border_color = &lt;color&gt; &lt;opacity&gt;</strong></p>
+<blockquote>
+<p>Border color.</p>
+</blockquote>
+<p>For example, the following config defines two background objects:</p>
+<pre><code># Background 1
+rounded = 1
+background_color = #282828 100
+border_color = #000000 0
+
+# Background 2
+rounded = 1
+background_color = #f6b655 90
+border_color = #cccccc 40</code></pre>
+<p>Later in the config file, these backgrounds can be applied using the
+assigned id, for example:</p>
+<pre><code>panel_background_id = 1
+taskbar_background_id = 0
+task_background_id = 0
+task_active_background_id = 2
+clock_background_id = 0</code></pre>
+<h2 id="panel"><a class="perma" href="#panel">🔗</a>Panel</h2>
+<p><strong id="entry_panel_background_id_=_id"><a class="perma" href="#entry_panel_background_id_=_id">🔗</a>panel_background_id = &lt;id&gt;</strong></p>
+<blockquote>
+<p>Which background to use for the panel. Default is 0.</p>
+</blockquote>
+<p><strong id="entry_panel_items_=_string"><a class="perma" href="#entry_panel_items_=_string">🔗</a>panel_items = string</strong></p>
+<blockquote>
+<p>Which plugins to be shown and their order (from left to right). Each
+letter refers to an item as defined below. Default is
+<strong>TC</strong>.</p>
+<ul>
+<li><p><strong id="entry_t"><a class="perma" href="#entry_t">🔗</a>T</strong> shows the taskbar</p></li>
+<li><p><strong id="entry_c"><a class="perma" href="#entry_c">🔗</a>C</strong> shows the clock</p></li>
+</ul>
+</blockquote>
+<p><strong id="entry_panel_size_=___height"><a class="perma" href="#entry_panel_size_=___height">🔗</a>panel_size = _ &lt;height&gt;</strong></p>
+<blockquote>
+<p>Panel height in pixels. Default is 36.</p>
+</blockquote>
+<h2 id="taskbar"><a class="perma" href="#taskbar">🔗</a>Taskbar</h2>
+<p><strong id="entry_taskbar_background_id_=_id"><a class="perma" href="#entry_taskbar_background_id_=_id">🔗</a>taskbar_background_id = &lt;id&gt;</strong></p>
+<blockquote>
+<p>Which background to use for the taskbar. Default is 0.</p>
+</blockquote>
+<p><strong id="entry_taskbar_padding_=_horizontal-padding_vertical-padding__spacing"><a class="perma" href="#entry_taskbar_padding_=_horizontal-padding_vertical-padding__spacing">🔗</a>taskbar_padding = &lt;horizontal-padding&gt;
+&lt;vertical-padding&gt; &lt;spacing&gt;</strong></p>
+<blockquote>
+<p>Taskbar padding and spacing of tasks within it. Default is 0 for
+all.</p>
+<pre><code>taskbar
+╔═════════════════════════╗
+║      2           2      ║
+║   ┌─────┐     ┌─────┐   ║
+║ 1 │task │  3  │task │ 1 ║
+║   └─────┘     └─────┘   ║
+║      2           2      ║
+╚═════════════════════════╝
+1. horizontal padding
+2. vertical padding
+3. spacing</code></pre>
+</blockquote>
+<h2 id="taskbar_task"><a class="perma" href="#taskbar_task">🔗</a>Taskbar Task</h2>
+<p>A task is the graphical artefact representing one application within
+the taskbar.</p>
+<p><strong id="entry_task_maximum_size_=_width"><a class="perma" href="#entry_task_maximum_size_=_width">🔗</a>task_maximum_size = &lt;width&gt; _</strong></p>
+<blockquote>
+<p>Maximum width of tasks to limit their size. Use
+<strong>width=0</strong> to use the full taskbar width. Default is
+0.</p>
+</blockquote>
+<p><strong id="entry_task_font_=_font____size"><a class="perma" href="#entry_task_font_=_font____size">🔗</a>task_font = &lt;font&gt; _ &lt;size&gt;</strong></p>
+<blockquote>
+<p>Font and size to use for tasks</p>
+</blockquote>
+<p><strong id="entry_task_font_color_=_color__opacity"><a class="perma" href="#entry_task_font_color_=_color__opacity">🔗</a>task_font_color = &lt;color&gt; &lt;opacity&gt;</strong></p>
+<blockquote>
+<p>Font color to use for tasks</p>
+</blockquote>
+<p><strong id="entry_task_background_id_=_id"><a class="perma" href="#entry_task_background_id_=_id">🔗</a>task_background_id = &lt;id&gt;</strong></p>
+<blockquote>
+<p>Which background to use for non selected tasks</p>
+</blockquote>
+<p><strong id="entry_task_active_background_id_=_id"><a class="perma" href="#entry_task_active_background_id_=_id">🔗</a>task_active_background_id = &lt;id&gt;</strong></p>
+<blockquote>
+<p>Which background to use for non selected tasks</p>
+</blockquote>
+<h2 id="clock"><a class="perma" href="#clock">🔗</a>Clock</h2>
+<p><strong id="entry_time1_font_=_font____size"><a class="perma" href="#entry_time1_font_=_font____size">🔗</a>time1_font = &lt;font&gt; _ &lt;size&gt;</strong></p>
+<blockquote>
+<p>Font and size to use for the clock</p>
+</blockquote>
+<p><strong id="entry_clock_font_color_=_color__opacity"><a class="perma" href="#entry_clock_font_color_=_color__opacity">🔗</a>clock_font_color = &lt;color&gt; &lt;opacity&gt;</strong></p>
+<blockquote>
+<p>Font color to use for the clock</p>
+</blockquote>
+<p><strong id="entry_clock_background_id_=_id"><a class="perma" href="#entry_clock_background_id_=_id">🔗</a>clock_background_id = &lt;id&gt;</strong></p>
+<blockquote>
+<p>Which background to use for the clock</p>
+</blockquote>
+</main>
+</body>
+</html>

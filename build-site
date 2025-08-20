@@ -18,10 +18,30 @@ build_src_pages () {
 	done
 }
 
+build_man_pages () {
+	[ -e tint.1.scd ] || wcurl https://raw.githubusercontent.com/teallach-desktop/tint/refs/heads/master/doc/tint.1.scd
+
+	scds=tint.1.scd
+	for scd in $scds; do
+		html=${scd##*/}
+		html="${DEPLOY_DIR}/${html/%.scd/.html}"
+
+		[[ $html -ot $scd ]] || continue
+
+		echo "Converting $scd to $html"
+
+		sed 's/sans-serif;/monospace;/' src/template_pre.html > "$html"
+		scdoc < "$scd" |  pandoc --from man >> "$html"
+		cat src/template_post.html >> "$html"
+		./man_post_processing.py "$html"
+	done
+}
+
 main () {
 	mkdir -p "$DEPLOY_DIR"
 
 	build_src_pages
+	build_man_pages
 }
 
 main "$@"
