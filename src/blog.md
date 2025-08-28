@@ -1,3 +1,18 @@
+# 2025.35
+
+So far, teallach consists of only some scaffoldnig. A rough shape is starting
+to emerge.
+
+This week saw the addition of a rudimentary wallpaper setter client - in a mere
+129 lines of python code. We do not need too many helper apps like that, but
+setting the wallpaper by editing files manually is just hard work.
+
+```
+teallach-nitrogen
+```
+
+We use the Kvantum theme `KvGnomeDark`.
+
 # 2025.34
 
 ## Post-installation Script
@@ -12,6 +27,10 @@ teallach-welcome
 ```
 
 <img src="images/2025-34-welcome.png"/>
+
+As this matures, we may consider using the `--merge-config` flag and use a
+script to start the compositor which first adds `/usr/share/teallach/...` into
+`XDG_CONFIG_DIRS`.
 
 ## Theming
 
