@@ -1,3 +1,23 @@
+# 2025.38
+
+It appears that not all users like to install things in their `$HOME`
+directory. Teallach can now be install on Arch Linux like this:
+
+1. Boot from an Arch Linux iso
+2. Run `archinstall` and use profile `Labwc`
+3. Install `git`
+4. Download the bootstrap script with
+
+```
+git clone https://github.com/teallach-desktop/bootstrap-arch.git
+```
+
+5. Run the script with `cd bootstrap-arch ; ./bootstrap.sh`
+6. Run `teallach-welcome` to populate `~/.config/teallach/`
+7. Reboot and choose `Teallach` at the display manager prompt (I used SDDM)
+
+> Note: All the bootstrap script does is to build arch packages for `tint`, `labwc-menu-generator`, `labwc-tweaks` and `teallach` using the PKGBUILD files in the boostrap repo.
+
 # 2025.35
 
 So far, teallach consists of only some scaffoldnig. A rough shape is starting
