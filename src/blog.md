@@ -18,6 +18,8 @@ git clone https://github.com/teallach-desktop/bootstrap-arch.git
 
 > Note: All the bootstrap script does is to build arch packages for `tint`, `labwc-menu-generator`, `labwc-tweaks` and `teallach` using the PKGBUILD files in the boostrap repo.
 
+<img src="images/2025-38-scrot.png"/>
+
 # 2025.35
 
 So far, teallach consists of only some scaffoldnig. A rough shape is starting
