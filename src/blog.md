@@ -1,3 +1,9 @@
+# 2025.41
+
+@01micko has created a logo for this. Thanks! We have loosely named it shebang-redirect.
+
+<img src="images/bang-dark.png"/>
+
 # 2025.38
 
 It appears that not all users like to install things in their `$HOME`
