@@ -1,0 +1,40 @@
+
+--
+
+This is more of a blether than a blog; and I will try to stay on the topic of
+Desktop Environments (DEs), particularly with an emphasis on those with a
+partan, austere approach.
+
+First things first: What even is a DE? Searching around a bit, I think we can
+safely conclude that it
+
+In a classical senese one might say that a DE is
+- a Window manager
+- a suite of graphical applications with a common look & feel
+- Possibly a file manager
+...this is probably not that helpful in the context of a modern Linux setting
+
+A usable graphical experience should probably include:
+1. GUI for audio settings, removable media, logout, lock the screen, etc.
+
+- Settings that affect all applications???? Well maybe that's too much cohesion.
+- Should it really re-implement a brower, office suite and terminal? Doesn't make sense anymore.
+- Taskbars, launchers, things to parse .desktop files, mime types, 
+
+Cinnamon re-uses a lot of Gnome pieces.
+
+DE should:
+
+- Feel like a Desktop with a panel + wall paper and a way to start applications
+- Provide some abstraction from a user interface perspective - i.e. the answer cannot just be to use a terminal for everything.
+
+- Provide a blend of components to provide some overall functionality
+- Bridge the gap between different technologies ensuring that they work together seamlessly
+
+
+
+# COMPONENTS
+
+- Themes
+- xdg-desktop-portal
+- Set `XDG_CURRENT_DESKTOP`
