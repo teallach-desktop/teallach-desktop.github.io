@@ -1,6 +1,66 @@
+# 2025.42
+
+A spin with [trixie].
+
+1. Boot the trixie net-install iso
+2. Choose `install` rather than `graphical install`
+3. Untick `debian desktop environment` and `GNOME`
+4. As root, install sudo and run `usermod -a -G sudo <user>`
+5. Reboot
+6. Log in as yourself and do the following:
+
+```
+sudo apt install labwc git pkg-config make gcc scdoc meson dialog swaybg \
+    foot wlr-randr wtype pyqt6-dev wf-recorder xdg-utils xfce4-panel \
+    featherpad
+
+# To build+install labwc-tweaks you'll also need the packages listed
+# below. You can of course run labwc/teallach without it, but suggest
+# just going with it to get a feel for the setup.
+
+sudo apt install cmake qt6-base-dev qt6-tools-dev qt6-wayland-dev \
+    libglib2.0-dev libxkbcommon-dev libxml2-dev
+
+# We've installed xfce4-panel above, but if you want teallach's tint panel
+# you'll additionally need:
+
+sudo apt install layer-shell-qt liblayershellqtinterface-dev libsfdo-dev \
+    qt6-wayland-private-dev qt6-base-private-dev
+
+mkdir bin
+
+# logout and login again for .profile to add ~/bin to $PATH
+
+git clone https://github.com/teallach-desktop/teallach
+cd teallach
+./install-subprojects
+./configure
+make
+make install
+
+# In the teallach-welcome script, choose either xfce4-panel or tint depending
+# on what you've installed and then hit 'Apply'
+teallach-welcome
+teallach
+
+# In way of post-installation steps, consider the following:
+
+./contrib/post-installation-01-foot.sh
+sudo apt install qt-style-kvantum qt6ct papirus-icon-theme
+
+# - Run qt6ct and set style=kvantum
+# - Run kvantummanager, and under 'change theme', choose KvGnomeDark and hit
+#   'use this theme'
+# - Run labwc-tweaks and set icon-theme=Papirus
+# - Finally select 'reconfigure' in the compositor root menu
+```
+
+[trixie]: https://www.debian.org/
+
 # 2025.41
 
-@01micko has created a logo for this. Thanks! We have loosely named it shebang-redirect.
+@01micko has created a logo for this. Thanks! We have loosely named it
+shebang-redirect.
 
 <img src="images/bang-dark.png"/>
 
