@@ -1,6 +1,6 @@
 Teallach is a Desktop Environment (DE) trying to offer a blend of speed, style
 and substance. It is inspired by [crunchbang], [bunsenlabs] and [deadbang].
-The primary aim of the Teallach project is to produce a stable setup, offering
+The primary aim of the Teallach project is to produce a stable setup, providing
 the best possible out-of-the-box [labwc] experience.
 
 It is thought of as a micro-DE (µDE) because it is smaller and more modest
