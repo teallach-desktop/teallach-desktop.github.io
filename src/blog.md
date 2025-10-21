@@ -1,3 +1,43 @@
+# 2025.43
+
+[freedesktop.org] is a great place to draw inspiration when authoring a Desktop
+Environment. For a start, they host projects upon which labwc and teallach are
+built, like Cairo, Mesa, Pixman, libinput, wlroots and Wayland. Further, they
+promote specifications and standards to help DEs co-exist, for example the Base
+Directory Specification.
+
+First things first, we set `XDG_CURRENT_DESKTOP=teallach;wlroots` because
+otherwise it does not feel like we are a Desktop Environment. This enables
+`xdg-desktop-portal` and tools like [xdg-open] to operate in a teallach centric
+way. For example, we can now use `teallach-mimeapps.list` so that `pcmanfm-qt`
+and others can associate the right apps with files without affecting other DEs
+with whom teallach may co-exist.
+
+We use the following wrappers to support setting favorite apps:
+
+- `tl-web-browser`: makes use of `xdg-settings get default-web-browser`.
+   We could consider `xdg-open https://` for this; it is not clear which is
+   better.
+- `tl-file-manager`: simply runs `xdg-open .`
+
+We ought to consider something like `tl-terminal-exec` too. There does not
+appear to be anything generic for opening a terminal. We like
+`xdg-terminal-exec` which is packaged on debian trixie, but weirdly not on
+Arch.
+
+It was tempting to write our own alternative to [xdg-open], but it felt better
+to just stick with the fd.o standard. [slopen] would have been quite a nice
+starting point for this.
+
+Interestingly, for already established DEs, [xdg-open] invokes to their
+respective resource openers (e.g. `exo-open` on Xfce). For us, the
+[xdg-open-script] does the hard work (see `open_generic()`).
+
+[freedesktop.org]: https://www.freedesktop.org/
+[slopen]: https://github.com/hckiang/slopen
+[xdg-open]: https://wiki.archlinux.org/title/Xdg-utils#xdg-open
+[xdg-open-script]: https://gitlab.freedesktop.org/xdg/xdg-utils/-/blob/master/scripts/xdg-open.in?ref_type=heads
+
 # 2025.42
 
 A spin with [trixie].
