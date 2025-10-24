@@ -174,9 +174,9 @@ better.</li>
 too. There does not appear to be anything generic for opening a
 terminal. We like <code>xdg-terminal-exec</code> which is packaged on
 debian trixie, but weirdly not on Arch.</p>
-<p>It was tempting to write our own alternative to <a
+<p>It is tempting to write our own alternative to <a
 href="https://wiki.archlinux.org/title/Xdg-utils#xdg-open">xdg-open</a>,
-but it felt better to just stick with the fd.o standard. <a
+but it feels better to just stick with the fd.o standard. <a
 href="https://github.com/hckiang/slopen">slopen</a> would have been
 quite a nice starting point for this.</p>
 <p>Interestingly, for already established DEs, <a
@@ -286,7 +286,7 @@ hard work.</p>
 <p>It is not great for a packaged program to install files in
 <code>$HOME</code>. So when considering how teallach files should be
 organised, it seems like a post-installation script is required to write
-files like <code>~/.config/labwc/autostart</code></p>
+files like <code>~/.config/teallach/autostart</code></p>
 <pre><code>teallach-welcome</code></pre>
 <p><img src="images/2025-34-welcome.png"/></p>
 <p>As this matures, we may consider using the

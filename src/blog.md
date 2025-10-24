@@ -25,7 +25,7 @@ appear to be anything generic for opening a terminal. We like
 `xdg-terminal-exec` which is packaged on debian trixie, but weirdly not on
 Arch.
 
-It was tempting to write our own alternative to [xdg-open], but it felt better
+It is tempting to write our own alternative to [xdg-open], but it feels better
 to just stick with the fd.o standard. [slopen] would have been quite a nice
 starting point for this.
 
@@ -148,7 +148,7 @@ We use the Kvantum theme `KvGnomeDark`.
 It is not great for a packaged program to install files in `$HOME`. So when
 considering how teallach files should be organised, it seems like a
 post-installation script is required to write files like
-`~/.config/labwc/autostart`
+`~/.config/teallach/autostart`
 
 ```
 teallach-welcome
