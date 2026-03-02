@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+<title>teallach desktop</title>
+<meta charset="utf-8" />
+<meta name="description" content="Teallach - a micro Desktop Environment"/>
+<meta name="viewport" content="width=device-width">
+<style>
+body {
+	overflow-y: scroll;
+	font-family: sans-serif;
+	font-size: 100%;
+	max-width: 640px;
+	padding: 20px;
+	line-height: 1.5;
+	word-wrap: break-word;
+	margin: auto;
+	text-align: justify;
+	text-justify: inter-word;
+	--color-bg: #2E3436;
+	--color-hl: #333;
+	--color-fg: #C0C0C0;
+	--color-link: #FFFFFF;
+	--color-subtle: #555;
+	color: var(--color-fg);
+	background-color: var(--color-bg);
+}
+
+#menu {
+	font-family: sans-serif !important;
+}
+
+pre {
+	padding: 20px;
+	white-space: pre;
+	overflow-x: auto;
+	border: 1px dotted gray;
+	display: block;
+	margin: 20px auto;
+	color: var(--color-fg);
+	background-color: var(--color-bg);
+}
+
+code {
+	font-family: monospace;
+	color: var(--color-fg);
+	background-color: var(--color-bg);
+}
+
+img {
+	margin: 0px;
+	margin-bottom: 20px;
+	margin-top: 20px;
+	max-width: 100%;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table,th,td {
+	border: 1px solid black;
+}
+
+th,td {
+	padding: 15px;
+	text-align: left;
+}
+
+h1 a, h2 a, h3 a, h4 a, h5 a {
+	text-decoration: none;
+}
+
+h1, h2, h3, h4, h5 {
+	color: var(--color-fg);
+	font-family: sans-serif;
+	font-weight: bold;
+}
+
+h1 {
+	font-size: 130%;
+}
+
+h2 {
+	font-size: 120%;
+}
+
+h3 {
+	font-size: 110%;
+}
+
+h4 {
+	font-size: 105%;
+	font-style: italic;
+}
+
+h5 {
+	font-size: 100%;
+	font-style: italic;
+}
+
+dt code {
+	font-weight: bold;
+}
+
+dd p {
+	margin-top: 0;
+}
+
+a, a:visited {
+	color: var(--color-link);
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a.perma {
+	display: none;
+}
+a.perma:hover {
+	text-decoration: none;
+}
+:hover > a.perma {
+	width: 1.5em;
+	margin-left: -1.5em;
+	display: inline-block;
+}
+
+:target {
+	background-color: rgba(128, 128, 128, 0.2);
+}
+
+.LOC {
+	margin: 2em 0;
+}
+</style>
+</head>
+<body>
+<main>
+<center id="menu">
+[<a href="index.html">home</a>]
+[<a href="blog.html">blog</a>]
+[<a href="manual.html">manual</a>]
+</center>
+<!--%%%TOC%%%-->
+<h1 id="freedesktop">2025.43</h1>
+<p><a href="https://www.freedesktop.org/">freedesktop.org</a> is a great
+place to draw inspiration when authoring a Desktop Environment. For a
+start, they host projects upon which labwc and teallach are built, like
+Cairo, Mesa, Pixman, libinput, wlroots and Wayland. Further, they
+promote specifications and standards to help DEs co-exist, for example
+the Base Directory Specification.</p>
+<p>First things first, we set
+<code>XDG_CURRENT_DESKTOP=teallach;wlroots</code> because otherwise it
+does not feel like we are a Desktop Environment. This enables
+<code>xdg-desktop-portal</code> and tools like <a
+href="https://wiki.archlinux.org/title/Xdg-utils#xdg-open">xdg-open</a>
+to operate in a teallach centric way. For example, we can now use
+<code>teallach-mimeapps.list</code> so that <code>pcmanfm-qt</code> and
+others can associate the right apps with files without affecting other
+DEs with whom teallach may co-exist.</p>
+<p>We use the following wrappers to support setting favorite apps:</p>
+<ul>
+<li><code>tl-web-browser</code>: makes use of
+<code>xdg-settings get default-web-browser</code>. We could consider
+<code>xdg-open https://</code> for this; it is not clear which is
+better.</li>
+<li><code>tl-file-manager</code>: simply runs
+<code>xdg-open .</code></li>
+</ul>
+<p>We ought to consider something like <code>tl-terminal-exec</code>
+too. There does not appear to be anything generic for opening a
+terminal. We like <code>xdg-terminal-exec</code> which is packaged on
+debian trixie, but weirdly not on Arch.</p>
+<p>It is tempting to write our own alternative to <a
+href="https://wiki.archlinux.org/title/Xdg-utils#xdg-open">xdg-open</a>,
+but it feels better to just stick with the fd.o standard. <a
+href="https://github.com/hckiang/slopen">slopen</a> would have been
+quite a nice starting point for this.</p>
+<p>Interestingly, for already established DEs, <a
+href="https://wiki.archlinux.org/title/Xdg-utils#xdg-open">xdg-open</a>
+invokes to their respective resource openers (e.g. <code>exo-open</code>
+on Xfce). For us, the <a
+href="https://gitlab.freedesktop.org/xdg/xdg-utils/-/blob/master/scripts/xdg-open.in?ref_type=heads">xdg-open-script</a>
+does the hard work (see <code>open_generic()</code>).</p>
+<h1 id="trixie">2025.42</h1>
+<p>A spin with <a href="https://www.debian.org/">trixie</a>.</p>
+<ol type="1">
+<li>Boot the trixie net-install iso</li>
+<li>Choose <code>install</code> rather than
+<code>graphical install</code></li>
+<li>Untick <code>debian desktop environment</code> and
+<code>GNOME</code></li>
+<li>As root, install sudo and run
+<code>usermod -a -G sudo &lt;user&gt;</code></li>
+<li>Reboot</li>
+<li>Log in as yourself and do the following:</li>
+</ol>
+<pre><code>sudo apt install labwc git pkg-config make gcc scdoc meson dialog swaybg \
+    foot wlr-randr wtype pyqt6-dev wf-recorder xdg-utils xfce4-panel \
+    featherpad
+
+# To build+install labwc-tweaks you&#39;ll also need the packages listed
+# below. You can of course run labwc/teallach without it, but suggest
+# just going with it to get a feel for the setup.
+
+sudo apt install cmake qt6-base-dev qt6-tools-dev qt6-wayland-dev \
+    libglib2.0-dev libxkbcommon-dev libxml2-dev
+
+# We&#39;ve installed xfce4-panel above, but if you want teallach&#39;s tint panel
+# you&#39;ll additionally need:
+
+sudo apt install layer-shell-qt liblayershellqtinterface-dev libsfdo-dev \
+    qt6-wayland-private-dev qt6-base-private-dev
+
+mkdir bin
+
+# logout and login again for .profile to add ~/bin to $PATH
+
+git clone https://github.com/teallach-desktop/teallach
+cd teallach
+./install-subprojects
+./configure
+make
+make install
+
+# In the teallach-welcome script, choose either xfce4-panel or tint depending
+# on what you&#39;ve installed and then hit &#39;Apply&#39;
+teallach-welcome
+teallach
+
+# In way of post-installation steps, consider the following:
+
+./contrib/post-installation-01-foot.sh
+sudo apt install qt-style-kvantum qt6ct papirus-icon-theme
+
+# - Run qt6ct and set style=kvantum
+# - Run kvantummanager, and under &#39;change theme&#39;, choose KvGnomeDark and hit
+#   &#39;use this theme&#39;
+# - Run labwc-tweaks and set icon-theme=Papirus
+# - Finally select &#39;reconfigure&#39; in the compositor root menu</code></pre>
+<h1 id="logo">2025.41</h1>
+<p><span class="citation" data-cites="01micko">@01micko</span> has
+created a logo for this. Thanks! We have loosely named it
+shebang-redirect.</p>
+<p><img src="images/bang-dark.png"/></p>
+<h1 id="installation">2025.38</h1>
+<p>It appears that not all users like to install things in their
+<code>$HOME</code> directory. Teallach can now be install on Arch Linux
+like this:</p>
+<ol type="1">
+<li>Boot from an Arch Linux iso</li>
+<li>Run <code>archinstall</code> and use profile <code>Labwc</code></li>
+<li>Install <code>git</code></li>
+<li>Download the bootstrap script with</li>
+</ol>
+<pre><code>git clone https://github.com/teallach-desktop/bootstrap-arch.git</code></pre>
+<ol start="5" type="1">
+<li>Run the script with
+<code>cd bootstrap-arch ; ./bootstrap.sh</code></li>
+<li>Run <code>teallach-welcome</code> to populate
+<code>~/.config/teallach/</code></li>
+<li>Reboot and choose <code>Teallach</code> at the display manager
+prompt (I used SDDM)</li>
+</ol>
+<blockquote>
+<p>Note: All the bootstrap script does is to build arch packages for
+<code>tint</code>, <code>labwc-menu-generator</code>,
+<code>labwc-tweaks</code> and <code>teallach</code> using the PKGBUILD
+files in the boostrap repo.</p>
+</blockquote>
+<p><img src="images/2025-38-scrot.png"/></p>
+<h1 id="nitrogen">2025.35</h1>
+<p>So far, teallach consists of only some scaffoldnig. A rough shape is
+starting to emerge.</p>
+<p>This week saw the addition of a rudimentary wallpaper setter client -
+in a mere 129 lines of python code. We do not need too many helper apps
+like that, but setting the wallpaper by editing files manually is just
+hard work.</p>
+<pre><code>teallach-nitrogen</code></pre>
+<p>We use the Kvantum theme <code>KvGnomeDark</code>.</p>
+<h1 id="welcome-script">2025.34</h1>
+<h2 id="post-installation-script">Post-installation Script</h2>
+<p>It is not great for a packaged program to install files in
+<code>$HOME</code>. So when considering how teallach files should be
+organised, it seems like a post-installation script is required to write
+files like <code>~/.config/teallach/autostart</code></p>
+<pre><code>teallach-welcome</code></pre>
+<p><img src="images/2025-34-welcome.png"/></p>
+<p>As this matures, we may consider using the
+<code>--merge-config</code> flag and use a script to start the
+compositor which first adds <code>/usr/share/teallach/...</code> into
+<code>XDG_CONFIG_DIRS</code>.</p>
+<h2 id="theming">Theming</h2>
+<p>Let us favour Server Side Decoration.</p>
+<video width="180" height="90" controls>
+<source src="images/2025-34-theme.webm" type="video/webm"/>
+Your browser does not support the video tag.
+</video>
+<h1 id="menu_">2025.33</h1>
+<h2 id="menu">Menu</h2>
+<p>We have a menu! It is generated by <a
+href="https://github.com/teallach-desktop/teallach/tree/master/src/teallach-menu">teallach-menu</a>,
+which coverts a human-readable menu format (example below) into openbox
+compliant XML.</p>
+<pre><code>item Browser firefox
+item Terminal foot
+item Tweaks labwc-tweaks
+
+sepr
+
+exec labwc-menu-generator -b -t foot
+
+sepr
+
+menu Preferences
+  item &quot;Edit rc.xml&quot; &quot;featherpad ~/.config/labwc/rc.xml&quot;
+  item &quot;Edit autostart&quot; &quot;featherpad ~/.config/labwc/autostart&quot;
+
+menu Exit
+  conf Reconfigure
+  exit Logout</code></pre>
+<p><img src="images/2025-33-menu.png"/></p>
+<h2 id="palette">Palette</h2>
+<p>I think this palette looks good. It is not too dissimilar to that of
+CrunchBang and works fine with Adwaita Dark.</p>
+<p><img src="images/2025-33-palette.png"/></p>
+<pre><code>foot -o colors.background=505050
+tl-view-palette ~/.local/share/themes/teallach/labwc/palette.txt</code></pre>
+<h1 id="alpine">2025.32</h1>
+<p>If we start with a bare Alpine Linux installation, how much glue is
+needed to turn <code>labwc</code> into something that feels like a
+Desktop Environment?</p>
+<p><code>labwc</code> is running on Alpine 3.22 with only the following
+packages: <code>doas</code>, <code>labwc</code>,
+<code>ttf-dejavu</code>, <code>seatd</code>,
+<code>mesa-dri-gallium</code>, <code>dbus</code>, <code>dbus-x11</code>,
+<code>xwayland</code>.</p>
+</main>
+</body>
+</html>

@@ -145,22 +145,32 @@ a.perma:hover {
 [<a href="manual.html">manual</a>]
 </center>
 <!--%%%TOC%%%-->
+<h1 id="theming">2026.09</h1>
+<p>It is hard to achieve compositor and cross-toolkit visual uniformity,
+and increasingly so. I think this is because:</p>
+<ol type="1">
+<li>There is a shift in how Gtk 4 views theming and what it considers
+supported.</li>
+<li>Qt handles themes differently between QWidgets and QtQuick.</li>
+<li>There are other toolkits in use, for example <code>iced-rs</code>,
+<code>tk</code> and whatever is used by electron based
+applications.</li>
+</ol>
+<p>From a Teallach perspective it makes sense to:</p>
 <ul>
-<li><a href="blog-2026.html">2026</a>
+<li>Avoid chasing Qt/Gtk internal visuals; and not treating toolkits as
+theme providers. In other words, let us not try to parse Gtk CSS and
+Kvantum files on the fly.</li>
+<li>Build compositor themerc files and icons to be consistent with
+popular Gtk/Qt themes, rather than identical. In the same vein, try to
+match behaviour rather than pixel perfection.</li>
+<li>Treat applications as guests and accept that their looks will be
+toolkit dependent.</li>
+</ul>
+<p>Ref:</p>
 <ul>
-<li><a href="blog-2026.html#theming">09 theming</a></li>
-</ul></li>
-<li><a href="blog-2025.html">2025</a>
-<ul>
-<li><a href="blog-2025.html#freedesktop">43 freedesktop</a></li>
-<li><a href="blog-2025.html#trixie">42 trixie</a></li>
-<li><a href="blog-2025.html#logo">41 logo</a></li>
-<li><a href="blog-2025.html#installation">38 installation</a></li>
-<li><a href="blog-2025.html#nitrogen">35 nitrogen</a></li>
-<li><a href="blog-2025.html#welcome-script">34 welcome-script</a></li>
-<li><a href="blog-2025.html#menu_">33 menu and palette</a></li>
-<li><a href="blog-2025.html#alpine">32 alpine</a></li>
-</ul></li>
+<li><a
+href="https://github.com/johanmalm/theme-gubbins/">theme-gubbins</a></li>
 </ul>
 </main>
 </body>
