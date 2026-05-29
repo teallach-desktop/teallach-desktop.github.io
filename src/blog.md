@@ -1,4 +1,5 @@
 - [2026](blog-2026.html)
+  - [20 another logo](blog-2026.html#another-logo)
   - [09 theming](blog-2026.html#theming)
 - [2025](blog-2025.html)
   - [43 freedesktop](blog-2025.html#freedesktop)
