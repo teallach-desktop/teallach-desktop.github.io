@@ -146,6 +146,56 @@ a.perma:hover {
 [<a href="https://github.com/teallach-desktop/teallach">code</a>]
 </center>
 <!--%%%TOC%%%-->
+<h1 id="void">2026.38 Void</h1>
+<pre><code># On first boot, `xbps-query -m` shows that we only have base-system and
+# grub installed
+
+sudo xbps-install labwc foot wmenu dbus seatd mesa-dri
+
+# Install drivers depending on GPU
+sudo xbps-install libva-intel-driver
+
+sudo ln -s /etc/sv/seatd /var/service/
+sudo ln -s /etc/sv/dbus /var/service/
+
+sudo usermod -aG _seatd johan
+
+mkdir ~/.run
+mkdir ~/bin
+
+cat &gt;&gt; &quot;$HOME/.bash_profile&quot; &lt;&lt; EOF
+export XDG_RUNTIME_DIR=~/.run
+export PATH=$HOME/bin:$PATH
+teallach
+EOF
+
+# Reboot, then start the compositor with `labwc`
+labwc
+
+# Get teallach dependencies
+sudo xbps-install dialog wlr-randr wtype wf-recorder slurp \
+    swayidle swaylock swaybg \
+    xdg-utils labwc-menu-generator papirus-icon-theme \
+    python3-pyqt6 python3-pyqt6-gui python3-pyqt6-widgets
+
+# ...and we need git to get teallach
+sudo xbps-install git
+
+# Install teallach
+git clone https://github.com/teallach-desktop/teallach src/teallach
+cd src/teallach
+./configure
+make
+make install
+teallach-welcome
+
+# At this point you can exit the compositor and restart it with:
+
+teallach
+
+# Get some tools to enable work
+sudo xbps-install vim meson ninja make gcc pkg-config gitk scdoc \
+    mc imv firefox ripgrep wl-clipboard</code></pre>
 <h1 id="another-logo">2026.20 Another Logo</h1>
 <p>Well, let’s try again.</p>
 <p><img src="images/logo-256.png" /></p>
